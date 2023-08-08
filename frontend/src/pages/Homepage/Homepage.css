@@ -1,0 +1,380 @@
+@media only screen and (min-width: 1280px)  {
+/*Promotion Slider*/
+.promotion-slider {
+  padding: 30px;
+  height: 100vh;
+  margin: 0 auto;
+  width: 100vw !important
+}
+
+.carousel-inner {
+  height: 100%;
+}
+
+.carousel-image {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+}
+
+
+/*Why Us*/
+
+.why-us,
+.new-dish {
+  margin: 70px auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 75%
+}
+
+.title {
+  font-size: 2.4rem !important;
+  font-weight: 600 !important;
+  padding-bottom: 0 !important;
+  font-family: 'Kanit', sans-serif;
+}
+
+.why-us-text,
+.why-us-img,
+.new-dish-text,
+.new-dish-img,
+.delivery-img,
+.delivery-text {
+  flex-basis: calc(50% - 50px);
+}
+
+.scroll-img {
+  width: 100%;
+  height: 400px;
+}
+
+.why-us-text,
+.new-dish-text,
+.delivery-text {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.why-us-text p {
+  font-size: 1.2rem
+}
+
+.why-us-reasons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.why-us-reasons-item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.why-us-reasons-item i {
+  font-size: 1.7rem;
+  color: var(--primary-color-1)
+}
+
+.why-us-reasons-item span {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+/* Spinning Image*/
+.scroll-img.spin {
+  animation: spin 3s;
+  animation-iteration-count: 1;
+  animation-delay: 0.5s;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}}
+
+/*New Dish*/
+@media only screen and (min-width: 1280px) {
+.new-dish-container {
+  margin-top: 200px;
+  margin-bottom: 100px;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center center;
+  background-color: var(--primary-color-1);
+  background-image: url('https://demothemedh.b-cdn.net/piizalian/wp-content/uploads/2021/03/h2_shape.png');
+}
+
+.new-dish-container::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.new-dish {
+  width: 75%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  padding: 50px 0;
+  color: white;
+}
+
+.new-dish-img {
+  position: relative;
+  height: 320px;
+}
+
+@keyframes moveUpDown {
+  0% {
+    transform: translateY(0) rotate(20deg);
+  }
+
+  50% {
+    transform: translateY(-30px) rotate(20deg);
+  }
+
+  100% {
+    transform: translateY(0) rotate(20deg);
+  }
+}
+
+.new-dish-img img {
+  position: absolute;
+  top: -80%;
+  left: 15%;
+  width: auto;
+  height: 270%;
+  animation: moveUpDown 2s linear infinite;
+}
+
+.new-dish p {
+  font-size: 1.1rem;
+}
+
+.new-dish button,
+.delivery button {
+  width: 40%;
+  font-size: 1.4rem;
+  background-color: var(--primary-color-2);
+  font-weight: 500;
+  color: white !important;
+}
+.new-dish a, .delivery a {
+  font-size: 1.1rem !important;
+}
+
+.order-now-btn {
+  color: white !important;
+  text-decoration: none;
+}
+
+.new-dish button:hover,
+.delivery button:hover {
+  background-color: #e8b234;
+}}
+
+
+
+@media only screen and (min-width: 768px) {
+/*Popular Dish Navbar*/
+.menu_tab {
+  margin: 0 auto;
+  justify-content: center;
+}
+
+.nav-item {
+  display: inline-block;
+  text-align: center;
+}
+
+
+.nav-tabs .nav-link {
+  color: #000 !important;
+}
+
+.nav-tabs .nav-link.active {
+  background-color: var(--primary-color-1) !important;
+  color: white !important;
+  font-weight: 600;
+  border: 1px solid var(--primary-color-1);
+  text-transform: capitalize;
+}
+
+.nav-link:hover {
+  background-color: var(--primary-color-1) !important;
+  color: white !important;
+  border: 1px solid var(--primary-color-1);
+}
+
+/*Popular Dish List*/
+.popular-dish {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  justify-content: center;
+}
+
+.listPopularDish {
+  margin: 0;
+  flex-wrap: wrap;
+}
+
+.product-item {
+  justify-content: center;
+  border-radius: 10% !important;
+}
+
+.product-item img {
+  height: 80%;
+  width: 80%;
+  flex-basis: calc(25% - 1rem);
+}
+
+.product-item h5 {
+  height: 3rem;
+}
+
+.product-item button {
+  background-color: var(--primary-color-1);
+  border: none;
+}
+
+.product-item button:hover {
+  background-color: var(--primary-color-3);
+}
+
+
+.product-item h5 {
+  font-size: 1.3rem;
+  font-weight: 600
+}
+
+.product-item p {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.popular-dish h2 {
+  margin: 20px 0 30px !important;
+  text-transform: uppercase
+}
+
+.popular-dish h4 {
+  color: var(--primary-color-1);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.see-all-menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.see-all-menu:hover {
+  transform: translateX(-5px);
+}
+
+.see-all-menu:hover .fa {
+  margin-left: 5px;
+}
+
+.see-all-menu .fa {
+  display: none;
+}
+
+.see-all-menu:hover .fa {
+  display: inline-block;
+}
+}
+
+/*Coupon*/
+.coupon-img {
+  display: flex;
+  width: 75%;
+  margin: 120px auto !important;
+}
+
+@media only screen and (min-width: 1280px) {
+/*Delivery*/
+.delivery-container {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 110vw 100%;
+  margin: 100px 0;
+  width: 60% !important
+}
+
+.delivery {
+  margin: 50px auto !important;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 75% !important
+}
+
+.delivery-img {
+  margin-bottom: 50px;
+  height: 600px !important;
+}
+
+.delivery-benefit {
+  display: flex;
+  flex-direction: column;
+}
+
+.delivery-benefit-item {
+  background-color: var(--primary-color-3);
+  position: relative;
+  padding: 10px;
+  overflow: hidden;
+}
+
+.delivery-benefit-item:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0) 100%);
+}
+
+.delivery h2 {
+  color: white !important;
+  margin-left: 0
+}
+
+.delivery i {
+  font-size: 2rem;
+  color: var(--primary-color-1)
+}
+
+.delivery span {
+  font-size: 1.2rem;
+  font-weight: 500;
+}}
+
+.delivery button {
+  font-size: 1.2rem !important;
+  text-decoration: none !important;
+}
+
+.delivery a {
+  text-decoration: none;
+}

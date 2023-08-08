@@ -1,0 +1,168 @@
+.body-form {
+    display: grid;
+    place-items: center;
+    margin: 50px 0px;
+}
+
+.title-login-resigter {
+    text-align: center;
+    display: flex;
+    justify-content: space-around;
+    gap: 70px;
+}
+
+.title-login-resigter a {
+    text-decoration: none;
+    color: black;
+    font-size: 30px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+
+.form-container {
+    position: relative;
+    overflow: hidden;
+    width: 600px;
+    height: 450px;
+    margin-top: 50px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    padding: 20px;
+}
+
+.form-login {
+    width: 600px;
+    padding: 24px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    transform: translateY(200%);
+    position: absolute;
+    top: 0;
+    left: 0;
+
+}
+
+.active-login {
+    transform: translateY(0);
+}
+
+.form-register {
+    width: 600px;
+    padding: 24px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    position: absolute;
+    transform: translateY(200%);
+    top: 0;
+    left: 0;
+}
+
+.active-register {
+    transform: translateY(0);
+}
+
+.title-login-resigter .active {
+    position: relative;
+}
+
+.title-login-resigter .active::after {
+    position: absolute;
+    content: "";
+    left: 0;
+    bottom: -8px;
+    width: 100%;
+    height: 3px;
+    background-color: #0b603d;
+}
+
+.btn-login-register {
+    background: #0b603d;
+    color: white;
+}
+@media (max-width: 600px) {
+    .title-login-resigter {
+        gap: 40px;
+    }
+
+    .title-login-resigter a {
+        font-size: 20px;
+    }
+
+    .form-container {
+        width: 400px;
+    }
+
+    .form-login {
+        width: 400px;
+
+    }
+
+    .form-register {
+        width: 400px;
+    }
+
+    .btn-login-register{
+        width: 100px;
+        padding: 5px;
+    }
+}
+@media (max-width:576px) {
+    .title-login-resigter {
+        gap: 40px;
+    }
+
+    .title-login-resigter a {
+        font-size: 20px;
+    }
+
+    .form-container {
+        width: 400px;
+    }
+
+    .form-login {
+        width: 400px;
+
+    }
+
+    .form-register {
+        width: 400px;
+    }
+
+    .btn-login-register{
+        width: 100px;
+        padding: 5px;
+    }
+}
+
+@media (max-width:400px) {
+    .title-login-resigter {
+        gap: 40px;
+    }
+
+    .title-login-resigter a {
+        font-size: 20px;
+    }
+
+    .form-container {
+        width: 350px;
+    }
+
+    .form-login {
+        width: 350px;
+
+    }
+
+    .form-register {
+        width: 350px;
+    }
+
+    .btn-login-register{
+        width: 100px;
+        padding: 5px;
+    }
+
+    .modal-content{
+        width: 320px !important;
+        text-align: center;
+        margin: 0 auto;
+    }
+}
+

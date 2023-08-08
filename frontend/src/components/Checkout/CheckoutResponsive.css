@@ -1,0 +1,148 @@
+@media (max-width: 1199px){
+    .checkout{
+        padding: 100px 200px 100px 0px!important;
+        width: 1000px !important;
+    }
+
+    .checkout h2{
+        padding-left: 100px;
+        font-size: 26px;
+    }
+    .form-container-checkout{
+        width: 600px !important;
+    }
+}
+
+@media (max-width: 991px){
+    .checkout{
+        padding: 50px 50px 50px 0px!important;
+        width: 800px !important;
+    }
+    .checkout h2{
+        padding-left: 50px;
+        font-size: 26px;
+        font-weight: 600;
+    }
+    .form-container-checkout{
+        width: 500px !important;
+    }
+    .voucher{
+        display: flex;
+        flex-direction: column;
+       text-align: left;
+    }
+    .title-voucher{
+       padding-right: 310px;
+       padding-bottom: 20px;
+    }
+
+}
+
+@media (max-width: 767px){
+    .checkout{
+        padding: 0px 20px 50px 0px!important;
+        width: 600px !important;
+    }
+    .checkout h2{
+        font-size: 20px;
+        font-weight: 600;
+    }
+    .form-container-checkout{
+        width: 400px !important;
+        padding: 20px !important;
+    }
+    form input{
+        height: 30px !important;
+        font-size: 16px !important;
+    }
+    .title-voucher{
+        padding-right: 230px;
+        padding-bottom: 10px;
+     }
+     .voucher-btn{
+        font-size: 16px !important;
+     }
+}
+@media (max-width: 550px){
+    .checkout{
+        padding: 0px 150px 50px 0px!important;
+        width: 550px !important;
+    }
+    .checkout h2{
+        padding-left: 0px;
+    }
+    .form-container-checkout{
+        width: 350px !important;
+        padding: 20px !important;
+    }
+    form input{
+        height: 30px !important;
+        font-size: 16px !important;
+    }
+    .title-voucher{
+        padding-right: 180px;
+        padding-bottom: 10px;
+     }
+     .voucher-btn{
+        font-size: 16px !important;
+     }
+     .input-voucher{
+        width: 120px;
+     }
+}
+@media (max-width: 450px){
+    .checkout{
+        padding: 0px 150px 50px 0px!important;
+        width: 450px !important;
+    }
+    .checkout h2{
+        padding-left: 0px;
+        font-size: 14px;
+        font-weight: 700;
+    }
+    .form-container-checkout{
+        width: 300px !important;
+        padding: 20px !important;
+    }
+    form input{
+        margin-top: 5px !important;
+        height: 30px !important;
+        font-size: 13px !important;
+    }
+    .title-total-bill,
+    .title-fee{
+        font-size: 15px !important;
+    }
+    .title-voucher{
+        padding-right: 160px;
+        padding-bottom: 10px;
+        font-size: 15px !important;
+     }
+     .voucher-btn{
+        font-size: 16px !important;
+     }
+     .input-voucher{
+        width: 150px;
+     }
+     .billing-detail span{
+        font-size: 15px !important;
+     }
+
+     .billing-detail .input-phone,
+     .billing-detail .input-city,
+     .billing-detail .input-mail,
+     .billing-detail .input-address,
+     .billing-detail .input-name{
+        padding-top: 10px !important;
+     }
+     .subtotal-price{
+        font-size: 15px !important;
+     }
+     .discount-amount{
+        font-size: 15px !important;
+     }
+
+     .input-voucher{
+        width: 120px !important;
+     }
+}

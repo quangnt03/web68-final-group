@@ -1,0 +1,153 @@
+@media only screen and (min-width: 575px) and (max-width: 768px) {
+
+  /*Popular Dish Navbar*/
+  .menu_tab {
+    margin: 0 auto;
+    justify-content: center;
+  }
+
+  .nav-item {
+    display: inline-block;
+    text-align: center;
+    width: 100px;
+  }
+
+
+  .nav-tabs .nav-link {
+    color: #000 !important;
+    font-size: 1rem !important
+  }
+
+  .nav-tabs .nav-link.active {
+    background-color: var(--primary-color-1) !important;
+    color: white !important;
+    border: 1px solid var(--primary-color-1);
+    text-transform: capitalize;
+  }
+
+  .nav-link:hover {
+    background-color: var(--primary-color-1) !important;
+    color: white !important;
+    border: 1px solid var(--primary-color-1);
+  }
+
+  /*Popular Dish List*/
+  .popular-dish {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    justify-content: center;
+  }
+
+  .listPopularDish {
+    margin: 0;
+    flex-wrap: wrap;
+  }
+
+  .product-item {
+    justify-content: center;
+    border-radius: 10% !important;
+  }
+
+  .product-item img {
+    height: 80%;
+    width: 80%;
+    flex-basis: calc(25% - 1rem);
+  }
+
+  .product-item h5 {
+    height: 3rem;
+  }
+
+  .product-item button {
+    background-color: var(--primary-color-1);
+    border: none;
+  }
+
+  .product-item button:hover {
+    background-color: var(--primary-color-3);
+  }
+
+
+  .product-item h5 {
+    font-size: 1.3rem;
+    font-weight: 600
+  }
+
+  .product-item p {
+    font-size: 1.2rem;
+    font-weight: 500;
+  }
+
+  .popular-dish h2 {
+    margin: 20px 0 30px !important;
+    text-transform: uppercase
+  }
+
+  .popular-dish h4 {
+    color: var(--primary-color-1);
+    font-weight: 600;
+    text-decoration: underline;
+  }
+
+  .see-all-menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .see-all-menu:hover {
+    transform: translateX(-5px);
+  }
+
+  .see-all-menu:hover .fa {
+    margin-left: 5px;
+  }
+
+  .see-all-menu .fa {
+    display: none;
+  }
+
+  .see-all-menu:hover .fa {
+    display: inline-block;
+  }
+
+  .price-and-btn, .card-body {
+    width: 100% !important;
+    display: flex;
+    flex-direction: column;
+}
+.btn-primary{
+  width: 100px;
+  padding: 5px;
+}
+
+.navbar-nav{
+  align-items: center;
+}
+}
+
+
+@media only screen and (min-width: 1px) and (max-width: 639px) {
+  .navbar-nav li a{
+    width: 100px;
+    text-align: center;
+  }
+  .nav-option {
+    color: #000 !important;
+    font-size: 1.1rem !important;
+    width: 80px;
+  }
+
+  .nav-link.active{
+    background-color: var(--primary-color-1) !important;
+    color: white !important;
+  }
+
+  .price-and-btn, .card-body {
+    width: 100% !important;
+    display: flex;
+    flex-direction: column;
+}
+
+}

@@ -1,0 +1,26 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+:root {
+  --primary-color-1: #00814b;
+  --primary-color-2: #d50e15;
+  --primary-color-3: #ffb200;
+  --background-color-1: #f6f6f6;
+}
+
+.App {
+  min-height: 100vh !important;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-content{
+  flex: 1;
+}
+.footer-section {
+  flex-shrink: 0;
+}

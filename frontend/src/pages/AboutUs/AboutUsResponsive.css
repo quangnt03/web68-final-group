@@ -1,0 +1,39 @@
+
+@media (max-width: 750px){
+    .about-us-container {
+        flex-direction: column;
+      }
+      .about-us{
+        margin: 50px auto;
+    }
+    .about-us-container{
+       margin-top: 40px;
+    }
+    .about-us-img{
+        width: 100%;
+    }
+    .about-us-img img{
+        width: 100%;
+    }
+}
+
+@media (max-width: 600px){
+    .about-us{
+        margin: 50px auto;
+    }
+    .about-us-container{
+       margin-top: 40px;
+    }
+    .about-us-text h2{
+        font-size: 20px;
+    }
+    .about-us-text p{
+        font-size: 16px;
+    }
+    .about-us-img{
+        width: 100%;
+    }
+    .about-us-img img{
+        width: 100%;
+    }
+}

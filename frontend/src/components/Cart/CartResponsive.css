@@ -1,0 +1,11 @@
+@media (max-width: 1103px){
+    .table-cart{
+        width: 830px !important;
+    }
+}
+
+@media (max-width: 1000px){
+    .table-cart{
+        width: 700px !important;
+    }
+}

@@ -1,0 +1,148 @@
+.container {
+    margin: 100px auto;
+    width: 75%;
+}
+
+.product-name {
+    font-size: 1.7rem;
+    font-weight: 600;
+    line-height: 22px;
+    margin-bottom: 4px;
+    color: var(--primary-color-1)
+}
+
+.product-image-container,
+.product-detail-container {
+
+    flex-basis: calc(50% - 50px);
+
+}
+
+.product-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.product-image-container {
+    overflow: hidden;
+    border-radius: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.product-image {
+    width: 80%;
+    height: 80%;
+    object-fit: cover;
+}
+
+.product-price-discount {
+    font-size: 22px;
+    font-weight: 500;
+    padding: 10px 0;
+    clear: both;
+}
+
+.product-info p {
+    font-size: 1.2rem !important;
+}
+
+label,
+select,
+option {
+    font-size: 1.2rem !important;
+
+}
+
+.display-flex {
+    display: flex;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.product-info {
+    width: 100%;
+}
+
+.product-dtl p {
+    font-size: 14px;
+    line-height: 24px;
+    color: #7a7a7a;
+}
+
+.product-dtl .form-control {
+    font-size: 15px;
+}
+
+.product-dtl label {
+    line-height: 16px;
+    font-size: 15px;
+}
+
+.form-control:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.product-count {
+    margin-top: 15px;
+}
+
+.product-count .qtyminus,
+.product-count .qtyplus {
+    width: 34px;
+    height: 34px;
+    background: var(--primary-color-1);
+    text-align: center;
+    font-size: 19px;
+    line-height: 36px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.product-count .qtyminus {
+    border-radius: 3px 0 0 3px;
+    border: none;
+    transition: all 0.3s;
+    opacity: 0.8;
+}
+
+.product-count .qtyplus {
+    border-radius: 0 3px 3px 0;
+    border: none;
+    opacity: 0.8;
+}
+
+.product-count .qtyminus:hover,
+.product-count .qtyplus:hover {
+    opacity: 1;
+}
+
+.product-count .qty {
+    width: 60px;
+    text-align: center;
+    padding-top: 5px;
+}
+
+.round-black-btn {
+    border-radius: 4px;
+    background: var(--primary-color-1);
+    color: #fff;
+    padding: 7px 45px;
+    display: inline-block;
+    margin-top: 20px;
+    transition: all 0.5s ease-in-out 0s;
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+.round-black-btn:hover,
+.round-black-btn:focus {
+    background: var(--primary-color-3);
+    color: #212529;
+    text-decoration: none;
+}

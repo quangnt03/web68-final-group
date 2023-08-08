@@ -1,0 +1,49 @@
+.about-us {
+  width: 75%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 100px auto;
+}
+
+.about-us-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 100px;
+}
+
+.about-us-header {
+  width: 40%
+}
+
+.about-us-text,
+.about-us-img {
+  flex-basis: calc(50% - 50px);
+}
+
+.about-us-img {
+  overflow: hidden;
+  border-radius: 5%;
+}
+
+.about-us-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.about-us-text {
+  padding: 20px 0
+}
+
+.about-us h2 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  padding-bottom: 20px;
+}
+
+.about-us i:hover {
+  color: black;
+  cursor: default
+}
