@@ -12,6 +12,7 @@ import Cart from './components/Cart/Cart';
 import mockPopularDish from './mockData/mockPopularDish'
 import ErrorPage from './pages/ErrorPage/ErrorPage';
 import LoginRegister from './pages/LoginRegister/LoginRegister';
+import Test from './pages/Test';
 
 const App = () => {
   const [popularDish, setPopularDish] = useState([])
@@ -26,6 +27,7 @@ const App = () => {
     const storedCartList = localStorage.getItem("cart")
     return storedCartList ? JSON.parse(storedCartList) : [];
   });
+
   useEffect(() => {
     // Gọi API Combo
     fetch('https://646dc9739c677e23218a6722.mockapi.io/api/v1/combo')
@@ -188,6 +190,7 @@ const App = () => {
           <Route path='/checkout' element={<Checkout cart={cart} />} />
           <Route path='/cart' element={<Cart cart={cart} onDeleteProduct={onDeleteProduct} onDecreaseQuantity={onDecreaseQuantity} onIncreaseQuantity={onIncreaseQuantity} />} />
           <Route path="/*" element={<ErrorPage />} />
+          <Route path="/test-connection" element={<Test />} />
         </Routes>
       </section>
       <div className='footer-section'>
