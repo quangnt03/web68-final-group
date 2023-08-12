@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Admin.css";
 import { FaChevronRight } from "react-icons/fa";
 import { BsDot } from "react-icons/bs";
@@ -18,7 +18,6 @@ const Admin = ({ cart }) => {
         "Salad Gà giòn với trứng cút, thịt xông khói, phô mai parmesan và sốt Thousand Island",
       isPopular: true,
     },
-
     {
       id: "2",
       nameDishes: "Salad",
@@ -38,16 +37,53 @@ const Admin = ({ cart }) => {
       isPopular: false,
     },
   ]);
+  const [id, setId] = useState("");
+  const [title, setTitle] = useState("");
+  const [imageDish, setImageDish] = useState("");
+  const [priceDish, setPriceDish] = useState("");
+  const [describeDish, setDescribeDish] = useState("");
+  const [isPopularDish, setIsPopularDish] = useState(false);
+
   const [show, setShow] = useState(false);
   const [onClickUser, setOnClickUser] = useState(false);
   const [onClickProduct, setOnClickProduct] = useState(false);
   const [dishValue, setDishValue] = useState({
+    id: "",
     nameDishes: "",
     describe: "",
     image: "",
     price: "",
     isPopular: false,
   });
+
+  useEffect(() => {
+    if (dishValue && dishValue.id) {
+      setId(dishValue.id);
+      setTitle(dishValue.nameDishes);
+      setImageDish(dishValue.image);
+      setPriceDish(dishValue.price);
+      setDescribeDish(dishValue.describe);
+      setIsPopularDish(dishValue.isPopular);
+    }
+  }, [dishValue]);
+  console.log(title);
+  const onHandlerSubmitUpdate = () => {
+    const todoIndex = dishes.findIndex((itemId) => {
+      return itemId.id === id;
+    });
+    const updateTodoList = [...dishes];
+    updateTodoList[todoIndex] = {
+      ...updateTodoList[todoIndex],
+      nameDishes: title,
+      image: imageDish,
+      describe: describeDish,
+      price: priceDish,
+      isPopular: isPopularDish,
+    };
+    // updateTodoList[todoIndex].title = updateTitle;
+
+    setDishes(updateTodoList);
+  };
   const onClickBtnSidebar = (status) => {
     if (status === "user") {
       setOnClickUser(true);
@@ -90,31 +126,6 @@ const Admin = ({ cart }) => {
 
   console.log(dishes);
   const handleClose = () => setShow(false);
-  const onChangeHandlerDish = (e) => {
-    const { name, value } = e.target;
-
-    setDishValue({
-      ...dishValue,
-      [name]: value,
-    });
-  };
-  console.log(dishValue);
-
-  const onEditDishItem = (itemId, e) => {
-    e.preventDefault();
-    const dishItem = dishes.findIndex((item) => {
-      return item.id === itemId;
-    });
-    const dish = [...dishes];
-    dish[dishItem] = {
-      ...dish[dishItem],
-      nameDishes: dishValue.nameDishes,
-      describe: dishValue.describe,
-      image: dishValue.image,
-      price: dishValue.price,
-      isPopular: dishValue.isPopular,
-    };
-  };
 
   const listDishes = dishes?.map((dishesItem, index) => {
     const { id, nameDishes, price, describe, isPopular, image } = dishesItem;
@@ -130,8 +141,10 @@ const Admin = ({ cart }) => {
         <th>
           <button
             className="btn btn-primary"
-            onClick={() => setShow(true)}
-            data-bs-target="modalEditDishItem"
+            onClick={() => {
+              setShow(true);
+              setDishValue(dishesItem);
+            }}
           >
             Edit
           </button>
@@ -336,9 +349,6 @@ const Admin = ({ cart }) => {
                         className="form-control"
                         id="exampleInputEmail1"
                         placeholder="Des of role"
-                        name="nameDishes"
-                        value={dishes.nameDishes}
-                        onChange={onChangeHandlerDish}
                         {...register("nameDishes", {
                           required: {
                             value: true,
@@ -356,9 +366,6 @@ const Admin = ({ cart }) => {
                         class="form-control"
                         id="exampleInputImage"
                         placeholder="Des of role"
-                        name="image"
-                        onChange={onChangeHandlerDish}
-                        value={dishes.image}
                         {...register("image", {
                           required: {
                             value: true,
@@ -376,9 +383,6 @@ const Admin = ({ cart }) => {
                         class="form-control"
                         id="exampleInputPrice"
                         placeholder="Des of role"
-                        name="price"
-                        onChange={onChangeHandlerDish}
-                        value={dishes.price}
                         {...register("price", {
                           required: {
                             value: true,
@@ -396,9 +400,6 @@ const Admin = ({ cart }) => {
                         class="form-control"
                         id="exampleInputDescribe"
                         placeholder="Des of role"
-                        value={dishes.describe}
-                        name="describe"
-                        onChange={onChangeHandlerDish}
                         {...register("describe", {
                           required: {
                             value: true,
@@ -414,9 +415,6 @@ const Admin = ({ cart }) => {
                       <input
                         type="checkbox"
                         id="exampleInputPopular"
-                        name="isPopular"
-                        value={dishes.isPopular}
-                        onChange={onChangeHandlerDish}
                         {...register("isPopular")}
                       />
                     </div>
@@ -448,7 +446,7 @@ const Admin = ({ cart }) => {
               <Modal.Title>Upgrate Dish</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              <form onSubmit={onEditDishItem}>
+              <form onSubmit={onHandlerSubmitUpdate}>
                 <div className="mb-3">
                   <label for="exampleInputEmail1" className="form-label">
                     Tên món ăn
@@ -458,12 +456,9 @@ const Admin = ({ cart }) => {
                     className="form-control"
                     id="exampleInputEmail1"
                     placeholder="Des of role"
-                    {...register("nameDishes", {
-                      required: {
-                        value: true,
-                        message: "Please enter a dish.",
-                      },
-                    })}
+                    name="nameDishes"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
                   />
                 </div>
                 <div className="mb-3">
@@ -475,12 +470,9 @@ const Admin = ({ cart }) => {
                     class="form-control"
                     id="exampleInputImage"
                     placeholder="Des of role"
-                    {...register("image", {
-                      required: {
-                        value: true,
-                        message: "Please enter a image.",
-                      },
-                    })}
+                    name="image"
+                    onChange={(e) => setImageDish(e.target.value)}
+                    value={imageDish}
                   />
                 </div>
                 <div className="mb-3">
@@ -492,12 +484,9 @@ const Admin = ({ cart }) => {
                     class="form-control"
                     id="exampleInputPrice"
                     placeholder="Des of role"
-                    {...register("price", {
-                      required: {
-                        value: true,
-                        message: "Please enter a price.",
-                      },
-                    })}
+                    name="price"
+                    onChange={(e) => setPriceDish(e.target.value)}
+                    value={priceDish}
                   />
                 </div>
                 <div className="mb-3">
@@ -509,12 +498,9 @@ const Admin = ({ cart }) => {
                     class="form-control"
                     id="exampleInputDescribe"
                     placeholder="Des of role"
-                    {...register("describe", {
-                      required: {
-                        value: true,
-                        message: "Please enter a describe.",
-                      },
-                    })}
+                    value={describeDish}
+                    name="describe"
+                    onChange={(e) => setDescribeDish(e.target.value)}
                   />
                 </div>
                 <div className="mb-3">
@@ -524,7 +510,9 @@ const Admin = ({ cart }) => {
                   <input
                     type="checkbox"
                     id="exampleInputPopular"
-                    {...register("isPopular")}
+                    name="isPopular"
+                    value={isPopularDish}
+                    onChange={(e) => setIsPopularDish(e.target.value)}
                   />
                 </div>
                 <div
@@ -541,11 +529,7 @@ const Admin = ({ cart }) => {
                   >
                     Close
                   </button>
-                  <button
-                    type="submit"
-                    className="btn btn-primary"
-                    onClick={handleClose}
-                  >
+                  <button type="submit" className="btn btn-primary">
                     Update
                   </button>
                 </div>
