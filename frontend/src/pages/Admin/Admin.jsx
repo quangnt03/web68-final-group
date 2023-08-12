@@ -37,6 +37,66 @@ const Admin = ({ cart }) => {
       isPopular: false,
     },
   ]);
+
+  const listUsers = [
+    {
+      name: "Mark",
+      email: "Dom@gmai.com",
+      carts: [
+        {
+          title: "Pizza",
+          quantity: "1",
+        },
+        {
+          title: "Salad",
+          quantity: "2",
+        },
+        {
+          title: "Pepsi",
+          quantity: "1",
+        },
+      ],
+      totalBill: "80.000",
+    },
+    {
+      name: "Mark",
+      email: "Dom@gmai.com",
+      carts: [
+        {
+          title: "Pizza",
+          quantity: "1",
+        },
+        {
+          title: "Salad",
+          quantity: "2",
+        },
+        {
+          title: "Pepsi",
+          quantity: "1",
+        },
+      ],
+      totalBill: "80.000",
+    },
+    {
+      name: "Mark",
+      email: "Dom@gmai.com",
+      carts: [
+        {
+          title: "Pizza",
+          quantity: "1",
+        },
+        {
+          title: "Salad",
+          quantity: "2",
+        },
+        {
+          title: "Pepsi",
+          quantity: "1",
+        },
+      ],
+      totalBill: "80.000",
+    },
+  ];
   const [id, setId] = useState("");
   const [title, setTitle] = useState("");
   const [imageDish, setImageDish] = useState("");
@@ -67,7 +127,8 @@ const Admin = ({ cart }) => {
     }
   }, [dishValue]);
   console.log(title);
-  const onHandlerSubmitUpdate = () => {
+  const onHandlerSubmitUpdate = (e) => {
+    e.preventDefault();
     const todoIndex = dishes.findIndex((itemId) => {
       return itemId.id === id;
     });
@@ -80,7 +141,6 @@ const Admin = ({ cart }) => {
       price: priceDish,
       isPopular: isPopularDish,
     };
-    // updateTodoList[todoIndex].title = updateTitle;
 
     setDishes(updateTodoList);
   };
@@ -160,6 +220,34 @@ const Admin = ({ cart }) => {
       </tr>
     );
   });
+
+  const listUsersContainer = listUsers.map((userItem, index) => {
+    const { name, email, carts, totalBill } = userItem;
+    const cartList = carts.map((item) => {
+      const { title, quantity } = item;
+      return (
+        <div className="food-orders">
+          <p>{title}:</p>
+          <p>{quantity}</p>
+        </div>
+      );
+    });
+    return (
+      <tr style={{ verticalAlign: "middle" }}>
+        <th scope="row">1</th>
+        <td>{name}</td>
+        <td>{email}</td>
+        <td className="food-content">{cartList}</td>
+        <td>{totalBill}</td>
+        <th>
+          <button className="btn btn-danger">x</button>
+        </th>
+        <th>
+          <button></button>
+        </th>
+      </tr>
+    );
+  });
   return (
     <div className="admin-container">
       <div className="side-bar">
@@ -213,86 +301,7 @@ const Admin = ({ cart }) => {
                   <th></th>
                 </tr>
               </thead>
-              <tbody>
-                <tr style={{ verticalAlign: "middle" }}>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Dom@gmai.com</td>
-                  <td className="food-content">
-                    <div className="food-orders">
-                      <p>Pizza:</p>
-                      <p>50.000đ</p>
-                    </div>
-                    <div className="food-orders">
-                      <p>Salad:</p>
-                      <p>20.000đ</p>
-                    </div>
-                    <div className="food-orders">
-                      <p>Pepsi:</p>
-                      <p>10.000đ</p>
-                    </div>
-                  </td>
-                  <td>80.000đ</td>
-                  <th>
-                    <button className="btn btn-danger">x</button>
-                  </th>
-                  <th>
-                    <button></button>
-                  </th>
-                </tr>
-                <tr style={{ verticalAlign: "middle" }}>
-                  <th scope="row">2</th>
-                  <td>Jacob</td>
-                  <td>Dom@gmai.com</td>
-                  <td className="food-content">
-                    <div className="food-orders">
-                      <p>Pizza:</p>
-                      <p>50.000đ</p>
-                    </div>
-                    <div className="food-orders">
-                      <p>Salad:</p>
-                      <p>20.000đ</p>
-                    </div>
-                    <div className="food-orders">
-                      <p>Pepsi:</p>
-                      <p>10.000đ</p>
-                    </div>
-                  </td>
-                  <td>80.000đ</td>
-                  <th>
-                    <button className="btn btn-danger">x</button>
-                  </th>
-                  <th>
-                    <button></button>
-                  </th>
-                </tr>
-                <tr style={{ verticalAlign: "middle" }}>
-                  <th scope="row">3</th>
-                  <td>Larry the Bird</td>
-                  <td>Dom@gmai.com</td>
-                  <td className="food-content">
-                    <div className="food-orders">
-                      <p>Pizza:</p>
-                      <p>50.000đ</p>
-                    </div>
-                    <div className="food-orders">
-                      <p>Salad:</p>
-                      <p>20.000đ</p>
-                    </div>
-                    <div className="food-orders">
-                      <p>Pepsi:</p>
-                      <p>10.000đ</p>
-                    </div>
-                  </td>
-                  <td>80.000đ</td>
-                  <th>
-                    <button className="btn btn-danger">x</button>
-                  </th>
-                  <th>
-                    <button></button>
-                  </th>
-                </tr>
-              </tbody>
+              <tbody>{listUsersContainer}</tbody>
             </table>
           </div>
         </div>
