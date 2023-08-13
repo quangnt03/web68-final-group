@@ -1,22 +1,30 @@
-const express = require('express');
+const express = require("express");
+const cors = require("cors");
+const morgan = require("morgan");
+const helmet = require("helmet");
+
+require("dotenv").config();
+
+const routes = require("./routes");
+
+const config = require("./config");
+const connectToDb = require("./db");
+
 const app = express();
-const port = 5000; 
-const cors = require('cors');
+const port = config.port || 5000;
 
 app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(morgan("dev"));
+app.use(helmet());
 
-app.get('/', (req, res) => {
-  res.json({ message: 'Hello from the server!' });
-});
+app.use("/", routes);
 
-//Kiểm tra kết nối với front end
-app.get('/test-connection', (req, res) => {
-    console.log('API request received from frontend');
-    const data = { message: 'Hello from the backend!' };
-    res.json(data);
-  });
-  
-
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
+connectToDb()
+  .then(() => {
+    app.listen(port, () => {
+      console.log(`Server is running on port ${port}`);
+    });
+  })
+  .catch(() => process.exit(1));
