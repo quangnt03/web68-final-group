@@ -51,11 +51,6 @@ const Checkout = ({ cart }) => {
   const [voucherCode, setVoucherCode] = useState('');
   const [resultMessage, setResultMessage] = useState('');
   const [discountAmount, setDiscountAmount] = useState(0);
-  /*if (voucherCode === 'anngon') {
-    discountAmount = 10000
-  } else {
-    discountAmount = 0
-  }*/
   let priceUpdated = 0
   const handleApply = () => {
     if (voucherCode === 'anngon') {
