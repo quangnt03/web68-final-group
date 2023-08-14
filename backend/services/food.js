@@ -1,4 +1,4 @@
-const Food = require("../models/Food");
+const Food = require("../models/food.model");
 const UnprocessableEntityException = require("../exception/UnprocessableEntityException");
 const ResourceNotFoundException = require("../exception/ResourceNotFoundException");
 const errorMsg = require("../constants/exception");

@@ -4,8 +4,8 @@ const foodTypesConstants = require("../constants/foodTypes");
 const foodSchema = mongoose.Schema(
   {
     _id: {
-      type: mongoose.Types.ObjectId,
-      default: new mongoose.Types.ObjectId(),
+      type: String,
+      default: new mongoose.Types.ObjectId().toString(),
     },
     title: String,
     image: String,

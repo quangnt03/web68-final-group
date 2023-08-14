@@ -3,6 +3,7 @@ const asyncHandler = require("express-async-handler");
 const foodController = require("../controllers/food");
 const getValidationResult = require("../utils/getValidationResult");
 const newFoodValidators = require("../middlewares/validations/foodValidation");
+const requireAdmin = require("../middlewares/adminMiddleware");
 
 const validatorWithOptional = newFoodValidators.map((check) =>
   check.optional()
@@ -16,6 +17,7 @@ router.get("/:id", asyncHandler(foodController.getById));
 
 router.post(
   "/",
+  requireAdmin,
   newFoodValidators,
   getValidationResult,
   asyncHandler(foodController.createNewFood)
@@ -23,11 +25,12 @@ router.post(
 
 router.patch(
   "/:id",
+  requireAdmin,
   validatorWithOptional,
   getValidationResult,
   asyncHandler(foodController.editFood)
 );
 
-router.delete("/:id", asyncHandler(foodController.deleteFood));
+router.delete("/:id", requireAdmin, asyncHandler(foodController.deleteFood));
 
 module.exports = router;

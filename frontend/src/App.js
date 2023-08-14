@@ -11,8 +11,9 @@ import Checkout from './components/Checkout/Checkout';
 import Cart from './components/Cart/Cart';
 import mockPopularDish from './mockData/mockPopularDish'
 import ErrorPage from './pages/ErrorPage/ErrorPage';
-import LoginRegister from './pages/LoginRegister/LoginRegister';
-import Test from './pages/Test';
+import Login from './pages/LoginRegister/Login';
+import Register from './pages/LoginRegister/Register';
+import Test from './pages/Test'; 
 
 const App = () => {
   const [popularDish, setPopularDish] = useState([])
@@ -158,7 +159,6 @@ const App = () => {
             saladDishes={saladDishes}
           />
           } />
-          <Route path='/login&register' element={<LoginRegister />}/>
           <Route path="/about-us" element={<AboutUs />} />
           <Route
             path="/menu"
@@ -190,7 +190,9 @@ const App = () => {
           <Route path='/checkout' element={<Checkout cart={cart} />} />
           <Route path='/cart' element={<Cart cart={cart} onDeleteProduct={onDeleteProduct} onDecreaseQuantity={onDecreaseQuantity} onIncreaseQuantity={onIncreaseQuantity} />} />
           <Route path="/*" element={<ErrorPage />} />
-          <Route path="/test-connection" element={<Test />} />
+          <Route path="/account/login" element={<Login />} />
+          <Route path="/account/register" element={<Register />} />
+          <Route path="/test" element={<Test />} />
         </Routes>
       </section>
       <div className='footer-section'>

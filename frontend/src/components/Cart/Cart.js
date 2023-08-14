@@ -19,7 +19,7 @@ const Cart = ({ cart, onDeleteProduct, onDecreaseQuantity, onIncreaseQuantity })
   };
 
   const onNavigateToLoginRegisterPage = () => {
-    const to = `/login&register`;
+    const to = `/account/login?from=cart`;
     navigate(to);
   };
  
