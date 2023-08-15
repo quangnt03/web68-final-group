@@ -231,7 +231,7 @@ const Header = ({ cart, onDeleteProduct, onDecreaseQuantity, onIncreaseQuantity,
                 </a>
               </li>
               <li>
-                <a className="dropdown-item" href={isLoggedIn ? null : '/account/register'}
+                <a className="dropdown-item" role= "button" href={isLoggedIn ? null : '/account/register'}
                   onClick={isLoggedIn ? handleLogout : null}>
                   {isLoggedIn ? 'Đăng xuất' : 'Đăng ký'}
                 </a>

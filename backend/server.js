@@ -3,7 +3,7 @@ const port = 5000;
 const cors = require('cors');
 const mongoose = require('mongoose')
 const UserModel = require('./models/user.model')
-const {getAllUsers, getAllFoods, allUsers } = require("./db");
+const { getAllUsers, getAllFoods, allUsers } = require("./db");
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const { v4: uuidv4 } = require('uuid');
@@ -16,9 +16,9 @@ const app = express();
 app.use(cors());
 app.use(express.json())
 const saltRounds = 10;
- const secretKey = process.env.JWT_SECRET;
+const secretKey = process.env.JWT_SECRET;
 mongoose.connect("mongodb+srv://pizza:pizza@cluster0.5lroxkm.mongodb.net/PizzaStore", {
- useNewUrlParser: true,
+  useNewUrlParser: true,
   useUnifiedTopology: true
 })
   .then(() => {
@@ -58,14 +58,19 @@ app.post('/account/login', async (req, res) => {
       req.body.password,
       user.password
     )
+    console.log('Provided password:', req.body.password);
+    console.log('Stored hashed password:', user.password);
+    console.log('Password comparison result:', isPasswordValid);
     if (isPasswordValid) {
-      console.log('ok')
       const token = jwt.sign(
         { userId: user._id },
         secretKey
       )
 
       return res.json({ status: 'ok', token: token })
+    }
+    else {
+      return res.json({ status: 'error', error: `Incorrect password` })
     }
   } catch (err) {
     res.json({ status: 'error', error: err })
@@ -106,19 +111,19 @@ app.post('/account/register', async (req, res) => {
   }
 })
 
-  //Test authen + admin middleware
-  app.get('/protected', requireSignIn, requireAdmin, (req, res) => {
-    res.sendStatus(200);
-  });
+//Test authen + admin middleware
+app.get('/protected', requireSignIn, requireAdmin, (req, res) => {
+  res.sendStatus(200);
+});
 
 
-  //Đăng xuất
+//Đăng xuất
 app.post('/account/logout', (req, res) => {
   res.sendStatus(200);
 });
 
 
-app.get('/data/foods',  requireSignIn, requireAdmin, async (req, res) => {
+app.get('/data/foods', requireSignIn, requireAdmin, async (req, res) => {
   const data = await getAllFoods()
   res.json(data)
 })
@@ -134,33 +139,32 @@ app.get('/account', findUserByToken, async (req, res) => {
   }
 });
 
-  //Kiểm tra password trước khi cập nhật thông tin tài khoản
-  app.post('/check-password', findUserByToken, async (req, res) => {
-    try {
-      const user = req.user;
-      const password = req.password
-      const isPasswordCorrect = await bcrypt.compare(password, user.password);
-        console.log(isPasswordCorrect)
-      if (isPasswordCorrect) {
-        res.status(200).json(
-          { message: 'Password is correct',
-        user: user });
-      } else {
-        res.status(401).json({ message: 'Incorrect password' });
-      }
-    } catch (error) {
-      console.error('Error checking password:', error);
-      res.status(500).json({ message: 'Internal server error' });
+//Kiểm tra password trước khi cập nhật thông tin tài khoản
+app.post('/check-password', findUserByToken, async (req, res) => {
+  try {
+    const user = req.user;
+    const password = req.password
+    const isPasswordCorrect = await bcrypt.compare(password, user.password);
+    console.log(isPasswordCorrect)
+    if (isPasswordCorrect) {
+      res.status(200).json(
+        {
+          message: 'Password is correct',
+          user: user
+        });
+    } else {
+      res.status(401).json({ message: 'Incorrect password' });
     }
-  });
+  } catch (error) {
+    console.error('Error checking password:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
 
 //Update thông tin người dùng
 app.put('/update-user', async (req, res) => {
   try {
     const { user, updatedData } = req.body;
-    // Update the user's data
-    // user.username = req.body.username || user.username;
-    // user.email = req.body.email || user.email;
     const updatedFields = {
       username: updatedData.username,
       email: updatedData.email
@@ -181,8 +185,29 @@ app.put('/update-user', async (req, res) => {
       }
     } else {
       res.status(500).json({ message: 'Internal server error' });
-  }}
+    }
+  }
 });
+
+
+//Đổi mật khẩu
+app.put('/change-password', async (req, res) => {
+  try {
+    console.log('ba')
+    const { user, password } = req.body;
+    const hashedNewPassword = await bcrypt.hash(password, saltRounds)
+    const updatedPassword = await UserModel.findByIdAndUpdate(user._id, { password: hashedNewPassword }, { new: true });
+
+    if (!updatedPassword) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.status(200).json({ message: 'User data updated successfully' });
+  } catch (err) {
+    res.status(500).json({ message: 'Internal server error' });
+  }
+}
+);
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

@@ -21,10 +21,8 @@ const Admin = ({ cart }) => {
   const [onClickUser, setOnClickUser] = useState(true);
   const [onClickProduct, setOnClickProduct] = useState(false);
   const [onClickAccount, setOnClickAccount] = useState(false);
-  const [loading, setLoading] = useState(true);
   const [userData, setUserData] = useState({ username: '', email: '' })
   
-  let currentUser
   
   const onClickBtnSidebar = (status) => {
     if (status === "user") {
@@ -57,50 +55,9 @@ useEffect(() => {
       console.error('Error:', error);
     });
 }, []);
+
+
     //Fetch data người dùng hiện tại
-    // useEffect(() => {
-    //   fetch('/account', {
-    //           method: 'GET',
-    //           headers: {
-    //             Authorization: `Bearer ${localStorage.getItem('token')}`,
-    //           },
-    //         })
-    //     .then(response => response.json())
-    //     .then(data => {
-    //       currentUser = data
-    //       setUserData(data)
-    //       setLoading(false);
-          
-    //     })
-    //     .catch(error => {
-    //       console.error('Error:', error);
-    //     });
-    // }, []);
-    // let currentUser
-    // const fetchUserData = async () => {
-    //   try {
-    //     const response = await fetch('/account', {
-    //       method: 'GET',
-    //       headers: {
-    //         Authorization: `Bearer ${localStorage.getItem('token')}`,
-    //       },
-    //     });
-  
-    //     if (response.ok) {
-    //       const data = await response.json();
-    //       setUserData({ username: data.username, email: data.email });
-    //     } else {
-          
-    //       console.error('Error fetching user data:', response.statusText);
-    //     }
-    //   } catch (error) {
-    //     console.error('Error fetching user data:', error);
-    //   }
-    // };
-    // useEffect(() => {
-    //   fetchUserData()
-    //   console.log(userData)}, [])
-    
     useEffect(() => {
       const fetchUserData = async () => {
         try {
