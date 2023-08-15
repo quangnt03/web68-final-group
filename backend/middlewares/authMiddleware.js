@@ -14,7 +14,6 @@ const requireSignIn = (req, res, next) => {
 
     try {
         const decodedToken = jwt.verify(token, secretKey);
-        console.log('decodedToken', decodedToken)
         req.user = decodedToken;
         next();
     } catch (error) {

@@ -1,28 +1,37 @@
 const { MongoClient } = require("mongodb");
+const mongoose = require('mongoose')
+const UserModel = require('./models/user.model')
+const FoodModel = require('./models/food.model')
 
-const uri = "mongodb+srv://user:abc@cluster0.5lroxkm.mongodb.net/?retryWrites=true&w=majority"
-const client = new MongoClient(uri);
-let orderCollection, inventoryCollection, userCollection;
-async function connectToDb() {
-  try {
-    await client.connect();
-    console.log("Connected to MongoDB Atlas!");
+let userCollection, foodCollection, allUsers, allFoods;
 
-    const db = client.db("PizzaStore");
-    userCollection = db.collection("userdata");
-    allUsers = await userCollection.find({}).toArray();
+  // async function connectToDb() {
+  //   try {
+  //     console.log("ConnectToDb run");
+  
+  //     // Use the models to query data
+  //     // allUsers = await UserModel.find({}).exec();
+  //     // console.log(allUsers)
+  //   } catch (err) {
+  //     console.error('Error connecting to MongoDB:', err);
+  //   }
+  // }
 
-  } catch (err) {
-    console.error('Error connecting to MongoDB:', err);
-  }
-}
 
 async function getAllUsers() {
+  // const allUsers = await User.find({}).exec();
+  allUsers = await UserModel.find({}).exec();
   return allUsers;
 }
 
+async function getAllFoods() {
+  console.log('abc')
+  allFoods = await FoodModel.find({}).exec();
+  return allFoods;
+}
+
 module.exports = {
-  connectToDb, getAllUsers
+  getAllUsers, getAllFoods, allUsers, allFoods
 };
 
 

@@ -121,7 +121,6 @@ const Header = ({ cart, onDeleteProduct, onDecreaseQuantity, onIncreaseQuantity,
           // Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
       });
-      console.log('Response status:', response.status);
       if (response.ok) {
         localStorage.removeItem('token');
         localStorage.setItem('successLogin', false)
@@ -227,7 +226,7 @@ const Header = ({ cart, onDeleteProduct, onDecreaseQuantity, onIncreaseQuantity,
             </button>
             <ul className="dropdown-menu" aria-labelledby="accountDropdown">
               <li>
-                <a className="dropdown-item" href={isLoggedIn ? '/account' : '/account/login'}>
+                <a className="dropdown-item" href={isLoggedIn ? '/admin' : '/account/login'}>
                   {isLoggedIn ? 'Tài khoản' : 'Đăng nhập'}
                 </a>
               </li>
