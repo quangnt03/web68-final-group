@@ -31,7 +31,13 @@ module.exports = {
       if (!isPasswordValid) {
         throw new UnauthorizedException("Wrong password");
       }
-      const token = jwt.sign({ userId: user._id }, config.JWTSecret);
+      const token = jwt.sign(
+        { userId: user._id, role: user.role },
+        config.JWTSecret,
+        {
+          expiresIn: "24h",
+        }
+      );
 
       return res.status(200).json({
         success: true,

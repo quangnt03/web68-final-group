@@ -1,14 +1,16 @@
 const mongoose = require("mongoose");
+const UserModel = require("./user.model");
+const FoodModel = require("./food.model");
 
 const orderSchema = mongoose.Schema(
   {
     user: {
       type: mongoose.Types.ObjectId,
-      ref: "UserData",
+      ref: UserModel,
     },
     food: {
       type: mongoose.Types.ObjectId,
-      ref: "Food",
+      ref: FoodModel,
     },
     quantity: {
       type: Number,
@@ -19,10 +21,17 @@ const orderSchema = mongoose.Schema(
       default: Date.now(),
     },
   },
-  { toJSON: { virtuals: true } },
+  {
+    toJSON: { virtuals: true },
+    methods: {
+      addQuantity(quantity) {
+        this.quantity = this.quantity + quantity;
+      },
+    },
+  },
   { timestamps: true }
 );
 
-const orderModel = mongoose.model("Order", orderSchema);
+const orderModel = mongoose.model("Order", orderSchema, "orders");
 
 module.exports = orderModel;

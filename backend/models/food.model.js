@@ -3,10 +3,6 @@ const foodTypesConstants = require("../constants/foodTypes");
 
 const foodSchema = mongoose.Schema(
   {
-    _id: {
-      type: String,
-      default: new mongoose.Types.ObjectId().toString(),
-    },
     title: String,
     image: String,
     price: Number,
@@ -22,4 +18,5 @@ const foodSchema = mongoose.Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model("Food", foodSchema, "foods");
+const Food = mongoose.model("Food", foodSchema, "foods");
+module.exports = Food;
