@@ -4,7 +4,6 @@ import { useForm, clearErrors } from "react-hook-form";
 
 const AccountInfo = (props) => {
   const { userData, setUserData } = props
-  const [showPasswordInput, setShowPasswordInput] = useState(false);
   const [password, setPassword] = useState('');
   const { register, handleSubmit, formState, setValue, getValues, reset } = useForm();
   const { errors } = formState;
@@ -13,19 +12,16 @@ const AccountInfo = (props) => {
   const [accountInfoUpdate, setAccountInfoUpdate] = useState(false)
 
 
-
+  //Mở form thông tin tài khoản
   const toggleAccountInfoUpdate = () => {
     setAccountInfoUpdate(!accountInfoUpdate);
-    setShowPasswordInput(false);
   };
-
+  //Mở form thay đổi mật khẩu
   const togglePasswordChangeForm = () => {
     setShowPasswordChangeForm(!showPasswordChangeForm);
   };
 
-
-
-
+  //Nếu ko ở trạng thái edit thì set lại thông tin tài khoản như lúc đầu
   useEffect(() => {
     if (!accountInfoUpdate) {
       setValue('username', userData.username);
@@ -34,17 +30,11 @@ const AccountInfo = (props) => {
   }, [accountInfoUpdate, userData]);
 
 
-  const togglePasswordInput = () => {
-    setShowPasswordInput(!showPasswordInput);
-  };
-
-
-
-
+  //Submit form thông tin tài khoản
   const handleFormSubmit = async (data) => {
     const password = data.password
     const token = localStorage.getItem('token');
-    // Check password with your backend
+    // Kiểm tra password
     const response = await fetch('/check-password', {
       method: 'POST',
       headers: {
@@ -53,7 +43,7 @@ const AccountInfo = (props) => {
       },
       body: JSON.stringify({ password }),
     });
-
+    //Nếu pw hợp lệ, gửi thông tin update lên server
     if (response.ok) {
       console.log('password hợp lệ')
       const responseData = await response.json();
@@ -69,29 +59,17 @@ const AccountInfo = (props) => {
         },
         body: JSON.stringify(updateData),
       });
-
+      //Nếu update thông tin thành công
       if (updateResponse.ok) {
         console.log('User data updated successfully');
-        alert("Cập nhật tài khoản thành công. Vui lòng đăng nhập lại.");
-        try {
-          const response = await fetch('http://localhost:5000/account/logout', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-          });
-
-          if (response.ok) {
-            localStorage.removeItem('token');
-            localStorage.setItem('successLogin', false);
-            window.location.href = '/account/login';
-          } else {
-            console.error('Logout failed.');
-          }
-        } catch (error) {
-          console.error('Error during logout:', error);
-        }
+        alert("Cập nhật tài khoản thành công.");
+        setAccountInfoUpdate(false)
+        setUserData({
+          userData,
+          updateData
+        })
       }
+      //Xử lý lỗi
       else {
         const errorResponse = await updateResponse.json();
         if (errorResponse.error === 'Duplicate username') {
@@ -110,13 +88,12 @@ const AccountInfo = (props) => {
     }
   };
 
-
+  //Submit form đổi mật khẩu
   const passwordChangFormSubmit = async (data) => {
-    console.log(data);
     const password = data.oldPassword;
     const token = localStorage.getItem('token');
 
-
+    //Kiểm tra pw cũ
     const response = await fetch('/check-password', {
       method: 'POST',
       headers: {
@@ -125,7 +102,7 @@ const AccountInfo = (props) => {
       },
       body: JSON.stringify({ password }),
     });
-
+    //Gửi pw mới lên server
     if (response.ok) {
       console.log('password hợp lệ');
       const responseData = await response.json();
@@ -134,7 +111,6 @@ const AccountInfo = (props) => {
         user: responseData.user,
         password: updatedPassword,
       };
-      console.log(updateData)
       const updateResponse = await fetch('http://localhost:5000/change-password', {
         method: 'PUT',
         headers: {
@@ -142,7 +118,7 @@ const AccountInfo = (props) => {
         },
         body: JSON.stringify(updateData),
       });
-
+      //Đăng nhập lại nếu đổi pw thành công
       if (updateResponse.ok) {
         console.log('Password updated successfully');
         alert("Thay đổi mật khẩu thành công. Vui lòng đăng nhập lại.");
@@ -161,9 +137,11 @@ const AccountInfo = (props) => {
           } else {
             console.error('Logout failed.');
           }
+
         } catch (error) {
           console.error('Error during logout:', error);
         }
+        //Xử lý lỗi
       } else {
         const errorResponse = await updateResponse.json();
         setErrorMessage('Đã xảy ra lỗi. Vui lòng thử lại');
@@ -173,7 +151,6 @@ const AccountInfo = (props) => {
       return;
     }
   };
-
 
   return (
     <div className="container account-info-container mt-5">
@@ -268,9 +245,9 @@ const AccountInfo = (props) => {
                     }}>
                     {accountInfoUpdate ? 'Hủy bỏ' : 'Thay đổi thông tin tài khoản'}
                   </a>
-                    {!accountInfoUpdate && (<a className="edit-toggle text-success" role='button' onClick={togglePasswordChangeForm}>
-                      Thay đổi mật khẩu
-                    </a>)}
+                  {!accountInfoUpdate && (<a className="edit-toggle text-success" role='button' onClick={togglePasswordChangeForm}>
+                    Thay đổi mật khẩu
+                  </a>)}
 
                   {/* Form thay đổi mật khẩu */}
                 </form>
@@ -332,7 +309,7 @@ const AccountInfo = (props) => {
                   {errors.confirmPassword && (< p className='text-danger'>{errors.confirmPassword?.message}</p>)}
                 </div>
                 {showPasswordChangeForm && errorMessage && <p className="text-danger">{errorMessage}</p>}
-                  <div className="form-group">
+                <div className="form-group">
                   <button type="submit" className="btn btn-success">
                     Cập nhật
                   </button>

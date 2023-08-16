@@ -4,15 +4,9 @@ import './LoginRegister.css'
 import { useForm } from 'react-hook-form'
 
 const Register = () => {
-  const [cardRegister, setCardRegister] = useState(true);
   const { register, handleSubmit, formState } = useForm();
   const { errors } = formState;
   const [errorMessage, setErrorMessage] = useState('');
-  const [dataRegister, setDataRegister] = useState({
-    username: '',
-    email: '',
-    password: ''
-  });
   const navigate = useNavigate();
 
   async function onSubmit(data) {

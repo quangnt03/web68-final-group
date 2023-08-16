@@ -41,7 +41,6 @@ app.get('/test', (req, res) => {
   res.json(data);
 });
 app.post('/test-connection', (req, res) => {
-  console.log(req.body);
   res.json({ status: "ok" });
 });
 
@@ -58,9 +57,6 @@ app.post('/account/login', async (req, res) => {
       req.body.password,
       user.password
     )
-    console.log('Provided password:', req.body.password);
-    console.log('Stored hashed password:', user.password);
-    console.log('Password comparison result:', isPasswordValid);
     if (isPasswordValid) {
       const token = jwt.sign(
         { userId: user._id },
@@ -82,7 +78,6 @@ app.post('/account/register', async (req, res) => {
   try {
     const hashedPassword = await bcrypt.hash(req.body.password, saltRounds)
     const userId = uuidv4();
-    console.log(userId)
     await UserModel.create({
       userId: userId,
       username: req.body.username,
@@ -145,7 +140,6 @@ app.post('/check-password', findUserByToken, async (req, res) => {
     const user = req.user;
     const password = req.password
     const isPasswordCorrect = await bcrypt.compare(password, user.password);
-    console.log(isPasswordCorrect)
     if (isPasswordCorrect) {
       res.status(200).json(
         {
@@ -193,7 +187,6 @@ app.put('/update-user', async (req, res) => {
 //Đổi mật khẩu
 app.put('/change-password', async (req, res) => {
   try {
-    console.log('ba')
     const { user, password } = req.body;
     const hashedNewPassword = await bcrypt.hash(password, saltRounds)
     const updatedPassword = await UserModel.findByIdAndUpdate(user._id, { password: hashedNewPassword }, { new: true });

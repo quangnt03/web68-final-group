@@ -9,6 +9,7 @@ import UserList from "./UserList";
 import FoodList from "./FoodList";
 import AccountInfo from "./AccountInfo";
 import Modal from "react-bootstrap/Modal";
+import { useLocation } from 'react-router-dom';
 
 
 const Admin = ({ cart }) => {
@@ -19,13 +20,14 @@ const Admin = ({ cart }) => {
   const [describeDish, setDescribeDish] = useState("");
   const [isPopularDish, setIsPopularDish] = useState(false);
   const [show, setShow] = useState(false);
-  const [onClickUser, setOnClickUser] = useState(true);
+  const [onClickUser, setOnClickUser] = useState(false);
   const [onClickProduct, setOnClickProduct] = useState(false);
-  const [onClickAccount, setOnClickAccount] = useState(false);
+  const [onClickAccount, setOnClickAccount] = useState(true);
   const [userData, setUserData] = useState({ username: '', email: '' })
   const [isAdmin, setIsAdmin] = useState(false)
-  
-  
+  const location = useLocation();
+
+
   const onClickBtnSidebar = (status) => {
     if (status === "user") {
       setOnClickUser(true);
@@ -44,23 +46,24 @@ const Admin = ({ cart }) => {
     }
   };
   const [dishes, setDishes] = useState([])
-//Fetch data
-useEffect(() => {
-  // Fetch data món ăn
-  fetch('/data/foods')
-    .then(response => response.json())
-    .then(data => {
-      setDishes(data)
-      console.log('Food list', data)
-    })
-    .catch(error => {
-      console.error('Error:', error);
-    });
-}, []);
+  //Fetch data
+  useEffect(() => {
+    // Fetch data món ăn
+    fetch('/data/foods')
+      .then(response => response.json())
+      .then(data => {
+        setDishes(data)
+        console.log('Food list', data)
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+  }, []);
 
 
-    //Fetch data người dùng hiện tại
-    useEffect(() => {
+  //Fetch data người dùng hiện tại
+  useEffect(() => {
+    if (location.pathname === '/admin') {
       const fetchUserData = async () => {
         try {
           const response = await fetch('/admin', {
@@ -69,14 +72,13 @@ useEffect(() => {
               Authorization: `Bearer ${localStorage.getItem('token')}`,
             },
           });
-    
+
           if (response.ok) {
             const data = await response.json();
             setUserData(data);
             if (data.role === "admin") {
               setIsAdmin(true)
             }
-            console.log(isAdmin)
           } else {
             console.error('Error fetching user data:', response.statusText);
           }
@@ -84,16 +86,25 @@ useEffect(() => {
           console.error('Error fetching user data:', error);
         }
       };
-      fetchUserData();
-    }, []); 
-  
+      fetchUserData()
+    };
+  }, [[location.pathname]]);
+
   return (
     <div className="admin-container">
-      <div className="side-bar" id = "sidebar">
+      <div className="side-bar" id="sidebar">
         <div className="btn-container">
           <button className="btn-admin">
             <img src="./images/admin/user-1.png" alt="user" />
             <p>Admin</p>
+            <FaChevronRight className="icon-chev" />
+          </button>
+          <button
+            className={onClickAccount ? "btn-user active" : "btn-user"}
+            onClick={() => onClickBtnSidebar("account")}
+          >
+            <BsDot />
+            <p>Tài khoản</p>
             <FaChevronRight className="icon-chev" />
           </button>
           <button
@@ -112,25 +123,18 @@ useEffect(() => {
             <p>Products</p>
             <FaChevronRight className="icon-chev" />
           </button>
-          <button
-            className={onClickAccount ? "btn-user active" : "btn-user"}
-            onClick={() => onClickBtnSidebar("account")}
-          >
-            <BsDot />
-            <p>Tài khoản</p>
-            <FaChevronRight className="icon-chev" />
-          </button>
+
         </div>
       </div>
       <div className="tab-content">
-      {onClickUser && <UserList 
-      />}
-      {onClickProduct && <FoodList 
-      dishes = {dishes}
-      setDishes = {setDishes}/>}
-      { onClickAccount && <AccountInfo
-      userData = {userData}
-      setUserData = {setUserData}/>}
+        {onClickAccount && <AccountInfo
+          userData={userData}
+          setUserData={setUserData} />}
+        {onClickUser && <UserList
+        />}
+        {onClickProduct && <FoodList
+          dishes={dishes}
+          setDishes={setDishes} />}
       </div>
     </div>
   );

@@ -9,14 +9,13 @@ const Login = () => {
   const { register, handleSubmit, formState } = useForm();
   const { errors } = formState;
   const [errorMessage, setErrorMessage] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     window.localStorage.setItem("successLogin", JSON.stringify(successLogin));
   }, [successLogin])
 
-
-  const navigate = useNavigate();
-
+  //Kiểm tra xem có phải log in từ trang giỏ hàng ko
   const [searchParams] = useSearchParams();
   const fromCart = searchParams.get('from') === 'cart';
 

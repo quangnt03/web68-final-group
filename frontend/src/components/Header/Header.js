@@ -216,13 +216,13 @@ const Header = ({ cart, onDeleteProduct, onDecreaseQuantity, onIncreaseQuantity,
           {/* Account button */}
           <div className="dropdown">
             <button
-              className="btn dropdown-toggle"
+              className="btn dropdown-toggle account-btn"
               type="button"
               id="accountDropdown"
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
-              Account
+             <i class="material-icons">account_circle</i>
             </button>
             <ul className="dropdown-menu" aria-labelledby="accountDropdown">
               <li>
