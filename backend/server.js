@@ -129,10 +129,10 @@ app.get('/data/foods', requireSignIn, requireAdmin, async (req, res) => {
 })
 
 //Hiển thị thông tin tài khoản tại trang admin
-app.get('/account', findUserByToken, async (req, res) => {
+app.get('/admin', findUserByToken, async (req, res) => {
   try {
     const user = req.user
-    res.send({ username: user.username, email: user.email });
+    res.send({ username: user.username, email: user.email, role: user.role });
   } catch (error) {
     console.error('Error fetching user data:', error);
     res.status(500).send({ error: 'Server error' });

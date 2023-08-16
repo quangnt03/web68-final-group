@@ -10,6 +10,7 @@ import FoodList from "./FoodList";
 import AccountInfo from "./AccountInfo";
 import Modal from "react-bootstrap/Modal";
 
+
 const Admin = ({ cart }) => {
   const [id, setId] = useState("");
   const [title, setTitle] = useState("");
@@ -22,6 +23,7 @@ const Admin = ({ cart }) => {
   const [onClickProduct, setOnClickProduct] = useState(false);
   const [onClickAccount, setOnClickAccount] = useState(false);
   const [userData, setUserData] = useState({ username: '', email: '' })
+  const [isAdmin, setIsAdmin] = useState(false)
   
   
   const onClickBtnSidebar = (status) => {
@@ -61,7 +63,7 @@ useEffect(() => {
     useEffect(() => {
       const fetchUserData = async () => {
         try {
-          const response = await fetch('/account', {
+          const response = await fetch('/admin', {
             method: 'GET',
             headers: {
               Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -70,7 +72,11 @@ useEffect(() => {
     
           if (response.ok) {
             const data = await response.json();
-            setUserData({ username: data.username, email: data.email });
+            setUserData(data);
+            if (data.role === "admin") {
+              setIsAdmin(true)
+            }
+            console.log(isAdmin)
           } else {
             console.error('Error fetching user data:', response.statusText);
           }
@@ -78,7 +84,6 @@ useEffect(() => {
           console.error('Error fetching user data:', error);
         }
       };
-    
       fetchUserData();
     }, []); 
   

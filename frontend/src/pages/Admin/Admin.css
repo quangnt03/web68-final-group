@@ -19,7 +19,7 @@
   height: 23px;
 }
 .side-bar p {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 400;
   line-height: 24px;
 }
@@ -103,3 +103,23 @@
   padding: 16px;
 }
 
+/*Trang Account Info*/
+.account-info-container {
+  width: 80vw !important; 
+  padding: 50px 100px !important;
+}
+
+.account-info-container .text-success {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+  display:block
+}
+.account-info-container .card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 100px !important
+}
+
+.account-info-container .form-group {
+  margin-bottom: 20px
+}

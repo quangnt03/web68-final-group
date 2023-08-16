@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useForm, clearErrors } from "react-hook-form";
-import "./Admin.css";
+
 
 const AccountInfo = (props) => {
   const { userData, setUserData } = props
@@ -42,9 +42,7 @@ const AccountInfo = (props) => {
 
 
   const handleFormSubmit = async (data) => {
-    console.log(data)
     const password = data.password
-    console.log(password)
     const token = localStorage.getItem('token');
     // Check password with your backend
     const response = await fetch('/check-password', {
@@ -178,19 +176,19 @@ const AccountInfo = (props) => {
 
 
   return (
-    <div className="container w-100 mt-5">
+    <div className="container account-info-container mt-5">
       <div className="row justify-content-center">
         <div className="">
           <div className="card">
             <div className="card-header">
-              <h2 className="mb-0">Account information</h2>
+              <h2 className="mb-0">Thông tin tài khoản</h2>
             </div>
             <div className="card-body">
               {/* Form thông tin người dùng */}
               {!showPasswordChangeForm ? (
                 <form onSubmit={handleSubmit(handleFormSubmit)}>
                   <div className="form-group">
-                    <label htmlFor="username">Username</label>
+                    <label htmlFor="username">Tên đăng nhập</label>
                     <input
                       type="text"
                       defaultValue={userData.username}
@@ -229,7 +227,7 @@ const AccountInfo = (props) => {
                   </div>
                   {accountInfoUpdate && (
                     <div className="form-group">
-                      <label htmlFor="password">Password</label>
+                      <label htmlFor="password">Xác nhận mật khẩu</label>
                       <input
                         type="password"
                         className="form-control"
@@ -270,11 +268,9 @@ const AccountInfo = (props) => {
                     }}>
                     {accountInfoUpdate ? 'Hủy bỏ' : 'Thay đổi thông tin tài khoản'}
                   </a>
-                  <div>
                     {!accountInfoUpdate && (<a className="edit-toggle text-success" role='button' onClick={togglePasswordChangeForm}>
                       Thay đổi mật khẩu
                     </a>)}
-                  </div>
 
                   {/* Form thay đổi mật khẩu */}
                 </form>
@@ -336,7 +332,7 @@ const AccountInfo = (props) => {
                   {errors.confirmPassword && (< p className='text-danger'>{errors.confirmPassword?.message}</p>)}
                 </div>
                 {showPasswordChangeForm && errorMessage && <p className="text-danger">{errorMessage}</p>}
-                <div>
+                  <div className="form-group">
                   <button type="submit" className="btn btn-success">
                     Cập nhật
                   </button>
@@ -354,7 +350,7 @@ const AccountInfo = (props) => {
                       email: userData.email
                     });
                   }}>
-                  'Hủy bỏ'
+                  Hủy bỏ
                 </a>
 
               </form>)}
