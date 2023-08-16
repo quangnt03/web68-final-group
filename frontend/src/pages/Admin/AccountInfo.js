@@ -287,6 +287,7 @@ const AccountInfo = (props) => {
                       className="form-control"
                       id="oldPassword"
                       name="oldPassword"
+                      onFocus={() => setErrorMessage('')}
                       {...register("oldPassword", {
                         required: {
                           value: true,
@@ -344,10 +345,13 @@ const AccountInfo = (props) => {
                   className='text-success form-group' role='button'
                   onClick={() => {
                     togglePasswordChangeForm()
+                    setErrorMessage("")
                     reset({
                       oldPassword: "",
                       newPassword: "",
-                      confirmPassword: ""
+                      confirmPassword: "",
+                      username: userData.username,
+                      email: userData.email
                     });
                   }}>
                   'Hủy bỏ'
