@@ -223,11 +223,11 @@ const Header = ({ cart, onDeleteProduct, onDecreaseQuantity, onIncreaseQuantity,
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
-              Account
+              <i class="material-icons">account_circle</i>
             </button>
             <ul className="dropdown-menu" aria-labelledby="accountDropdown">
               <li>
-                <a className="dropdown-item" href={isLoggedIn ? '/account' : '/account/login'}>
+                <a className="dropdown-item" href={isLoggedIn ? '/admin' : '/account/login'}>
                   {isLoggedIn ? 'Tài khoản' : 'Đăng nhập'}
                 </a>
               </li>

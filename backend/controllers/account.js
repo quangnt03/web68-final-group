@@ -61,7 +61,7 @@ module.exports = {
 
       await user.save();
 
-      return res.status(400).json({ success: true });
+      res.json({ status: 'ok' })
     } catch (err) {
       if (err.code === 11000) {
         if (err.keyPattern.username) {
@@ -80,4 +80,80 @@ module.exports = {
       }
     }
   },
+
+  //Hiển thị thông tin tài khoản tại trang admin
+  async getUserInfo(req,res) {
+    try {
+      const user = req.user
+      res.send({ username: user.username, email: user.email, role: user.role });
+    } catch (error) {
+      console.error('Error fetching user data:', error);
+      res.status(500).send({ error: 'Server error' });
+    }
+  },
+
+  async checkPassword(req, res) {
+    try {
+      const user = req.user;
+      const password = req.password
+      const isPasswordCorrect = await bcrypt.compare(password, user.password);
+      if (isPasswordCorrect) {
+        res.status(200).json(
+          {
+            message: 'Password is correct',
+            user: user
+          });
+      } else {
+        res.status(401).json({ message: 'Incorrect password' });
+      }
+    } catch (error) {
+      console.error('Error checking password:', error);
+      res.status(500).json({ message: 'Internal server error' });
+    }
+  },
+
+  //Update thông tin người dùng
+  async updateUserInfo(req, res) {
+    try {
+      const { user, updatedData } = req.body;
+      const updatedFields = {
+        username: updatedData.username,
+        email: updatedData.email
+      }
+      const updatedUser = await UserModel.findByIdAndUpdate(user._id, updatedFields, { new: true });
+  
+      if (!updatedUser) {
+        return res.status(404).json({ message: 'User not found' });
+      }
+  
+      res.status(200).json({ message: 'User data updated successfully', updatedUser });
+    } catch (err) {
+      if (err.code === 11000) {
+        if (err.keyPattern.username) {
+          res.status(500).json({ status: 'error', error: 'Duplicate username' });;
+        } else if (err.keyPattern.email) {
+          res.status(500).json({ status: 'error', error: 'Duplicate email' });
+        }
+      } else {
+        res.status(500).json({ message: 'Internal server error' });
+      }
+    }
+  },
+
+  //Đổi password
+  async changePassword(req, res) {
+    try {
+      const { user, password } = req.body;
+      const hashedNewPassword = await bcrypt.hash(password, saltRounds)
+      const updatedPassword = await UserModel.findByIdAndUpdate(user._id, { password: hashedNewPassword }, { new: true });
+  
+      if (!updatedPassword) {
+        return res.status(404).json({ message: 'User not found' });
+      }
+  
+      res.status(200).json({ message: 'User data updated successfully' });
+    } catch (err) {
+      res.status(500).json({ message: 'Internal server error' });
+    }
+  }
 };

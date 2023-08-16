@@ -4,14 +4,9 @@ import './LoginRegister.css'
 import { useForm } from 'react-hook-form'
 
 const Register = () => {
-  const [cardRegister, setCardRegister] = useState(true);
   const { register, handleSubmit, formState } = useForm();
   const { errors } = formState;
-  const [dataRegister, setDataRegister] = useState({
-    username: '',
-    email: '',
-    password: ''
-  });
+  const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 
   async function onSubmit(data) {
@@ -28,19 +23,16 @@ const Register = () => {
       }),
     })
     const res = await response.json()
-
     if (res.status === 'ok') {
       const alertMessage = 'Đăng ký tài khoản thành công. Chuyển qua trang đăng nhập';
       window.alert(alertMessage);
       window.location.href = '/account/login'
     }
     else if (res.error === 'Duplicate username') {
-      const alertMessage = 'Tên người dùng đã tồn tại';
-      window.alert(alertMessage);
+      setErrorMessage('Tên người dùng đã tồn tại')
     }
     else if (res.error === 'Duplicate email') {
-      const alertMessage = 'Email đăng ký đã tồn tại';
-      window.alert(alertMessage);
+      setErrorMessage('Email đăng ký đã tồn tại')
     }
   };
 
@@ -97,12 +89,13 @@ const Register = () => {
                   message: "Mật khẩu có ít nhất 5 kí tự bao gồm có một kí tự đặc biệt"
                 },
                 minLength: {
-                  value: 1,
+                  value: 5,
                   message: "Mật khẩu có ít nhất 5 kí tự"
                 }
               })} />
             <p className='text-danger'>{errors.password?.message}</p>
           </div>
+          {errorMessage && <p className="text-danger">{errorMessage}</p>}
           <button style={{ background: "#0b603d" }} type="submit" className="btn btn-primary btn-login-register">Đăng ký</button>
         </form>
       </div>

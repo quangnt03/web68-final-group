@@ -13,6 +13,7 @@ import mockPopularDish from './mockData/mockPopularDish'
 import ErrorPage from './pages/ErrorPage/ErrorPage';
 import Login from './pages/LoginRegister/Login';
 import Register from './pages/LoginRegister/Register';
+import Admin from './pages/Admin/Admin';
 import Test from './pages/Test'; 
 
 const App = () => {
@@ -192,6 +193,7 @@ const App = () => {
           <Route path="/*" element={<ErrorPage />} />
           <Route path="/account/login" element={<Login />} />
           <Route path="/account/register" element={<Register />} />
+          <Route path="/admin" element={<Admin cart={cart} />} />
           <Route path="/test" element={<Test />} />
         </Routes>
       </section>

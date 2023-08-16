@@ -235,3 +235,14 @@
     background-color: #f5f5f5;
   }
 }
+
+
+/* Nút tài khoản */
+.material-icons {
+    font-size: 30px !important;
+    background-image: none
+}
+
+.material-icons:hover {
+    color: var(--background-color-1) !important
+}

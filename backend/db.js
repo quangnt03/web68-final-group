@@ -3,7 +3,7 @@ const config = require("./config");
 
 module.exports = async () => {
   try {
-    await mongoose.connect(config.mongoUri, {
+    await mongoose.connect("mongodb+srv://pizza:pizza@cluster0.5lroxkm.mongodb.net/PizzaStore", {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });

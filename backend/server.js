@@ -2,6 +2,8 @@ const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
 const helmet = require("helmet");
+const findUserByToken =require("./middlewares/findUserByToken")
+const accountRoute = require("./routes/account.route")
 
 require("dotenv").config();
 
@@ -22,6 +24,8 @@ app.use(morgan("dev"));
 app.use(helmet());
 
 app.use("/", routes);
+app.use("/account", accountRoute)
+
 
 connectToDb()
   .then(() => {
