@@ -127,6 +127,7 @@ const Admin = ({ cart }) => {
     }
   }, [dishValue]);
   console.log(title);
+
   const onHandlerSubmitUpdate = (e) => {
     e.preventDefault();
     const todoIndex = dishes.findIndex((itemId) => {
@@ -144,6 +145,7 @@ const Admin = ({ cart }) => {
 
     setDishes(updateTodoList);
   };
+
   const onClickBtnSidebar = (status) => {
     if (status === "user") {
       setOnClickUser(true);
@@ -223,7 +225,7 @@ const Admin = ({ cart }) => {
 
   const listUsersContainer = listUsers.map((userItem, index) => {
     const { name, email, carts, totalBill } = userItem;
-    const cartList = carts.map((item) => {
+    const cartList = carts.map((item, index) => {
       const { title, quantity } = item;
       return (
         <div className="food-orders">
@@ -234,16 +236,13 @@ const Admin = ({ cart }) => {
     });
     return (
       <tr style={{ verticalAlign: "middle" }}>
-        <th scope="row">1</th>
+        <th scope="row">{index}</th>
         <td>{name}</td>
         <td>{email}</td>
         <td className="food-content">{cartList}</td>
         <td>{totalBill}</td>
         <th>
           <button className="btn btn-danger">x</button>
-        </th>
-        <th>
-          <button></button>
         </th>
       </tr>
     );
@@ -297,7 +296,6 @@ const Admin = ({ cart }) => {
                   <th>Email</th>
                   <th>Giao dịch</th>
                   <th>Tổng tiền</th>
-                  <th></th>
                   <th></th>
                 </tr>
               </thead>
@@ -357,7 +355,7 @@ const Admin = ({ cart }) => {
                         type="text"
                         className="form-control"
                         id="exampleInputEmail1"
-                        placeholder="Des of role"
+                        placeholder="Name of dish"
                         {...register("nameDishes", {
                           required: {
                             value: true,
@@ -374,7 +372,7 @@ const Admin = ({ cart }) => {
                         type="text"
                         class="form-control"
                         id="exampleInputImage"
-                        placeholder="Des of role"
+                        placeholder="Image of dish"
                         {...register("image", {
                           required: {
                             value: true,
@@ -391,7 +389,7 @@ const Admin = ({ cart }) => {
                         type="text"
                         class="form-control"
                         id="exampleInputPrice"
-                        placeholder="Des of role"
+                        placeholder="Price of dish"
                         {...register("price", {
                           required: {
                             value: true,
@@ -408,7 +406,7 @@ const Admin = ({ cart }) => {
                         type="text"
                         class="form-control"
                         id="exampleInputDescribe"
-                        placeholder="Des of role"
+                        placeholder="Des of dish"
                         {...register("describe", {
                           required: {
                             value: true,
@@ -418,7 +416,11 @@ const Admin = ({ cart }) => {
                       />
                     </div>
                     <div className="mb-3">
-                      <label for="exampleInputPopular" className="form-label">
+                      <label
+                        for="exampleInputPopular"
+                        className="form-label"
+                        style={{ marginRight: "10px" }}
+                      >
                         Phổ biến
                       </label>
                       <input
@@ -464,7 +466,7 @@ const Admin = ({ cart }) => {
                     type="text"
                     className="form-control"
                     id="exampleInputEmail1"
-                    placeholder="Des of role"
+                    placeholder="Name of dish"
                     name="nameDishes"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
@@ -478,7 +480,7 @@ const Admin = ({ cart }) => {
                     type="text"
                     class="form-control"
                     id="exampleInputImage"
-                    placeholder="Des of role"
+                    placeholder="Image of dish"
                     name="image"
                     onChange={(e) => setImageDish(e.target.value)}
                     value={imageDish}
@@ -492,7 +494,7 @@ const Admin = ({ cart }) => {
                     type="text"
                     class="form-control"
                     id="exampleInputPrice"
-                    placeholder="Des of role"
+                    placeholder="Price of dish"
                     name="price"
                     onChange={(e) => setPriceDish(e.target.value)}
                     value={priceDish}
@@ -506,14 +508,18 @@ const Admin = ({ cart }) => {
                     type="text"
                     class="form-control"
                     id="exampleInputDescribe"
-                    placeholder="Des of role"
+                    placeholder="Des of dish"
                     value={describeDish}
                     name="describe"
                     onChange={(e) => setDescribeDish(e.target.value)}
                   />
                 </div>
                 <div className="mb-3">
-                  <label for="exampleInputPopular" className="form-label">
+                  <label
+                    for="exampleInputPopular"
+                    className="form-label"
+                    style={{ marginRight: "10px" }}
+                  >
                     Phổ biến
                   </label>
                   <input
