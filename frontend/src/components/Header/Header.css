@@ -242,6 +242,6 @@
     }
 
     .material-icons:hover {
-        color: yellow !important
+        color: var(--background-color-1) !important
     }
 }
