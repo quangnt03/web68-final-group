@@ -52,7 +52,6 @@ const PopularDish = ({ onAddToCart, appetizerDishes, pizzaDishes, pastaDishes, s
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
-    console.log("Tab đang active là", activeTab)
   };
 
   /*Các món pizza */
@@ -76,8 +75,6 @@ const PopularDish = ({ onAddToCart, appetizerDishes, pizzaDishes, pastaDishes, s
   /*Các món mì Ý*/
   const popularPastaList = pastaDishes && pastaDishes.filter(dish =>
     dish.isPopular === true)
-  console.log("Pasta popular", popularPastaList)
-  console.log("All pasta", pastaDishes)
   const popularPastaRender = popularPastaList && popularPastaList.map(dish => {
     const { title, image, price, content, id } = dish
     return (

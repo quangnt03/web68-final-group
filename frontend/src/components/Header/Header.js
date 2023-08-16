@@ -18,6 +18,8 @@ const Header = ({ cart, onDeleteProduct, onDecreaseQuantity, onIncreaseQuantity,
   saladDishes,
   drinkDishes }) => {
 
+  const isLoggedIn = localStorage.getItem('successLogin') === 'true';
+
 
   // Function search
 
@@ -89,7 +91,6 @@ const Header = ({ cart, onDeleteProduct, onDecreaseQuantity, onIncreaseQuantity,
               style={{ background: "#0b603d", padding: "5px 10px", marginRight: "5px" }}
               className="btn btn-primary btn-sm btn-cart-items"
               onClick={() => onDecreaseQuantity(id)}
-            // disabled={isDisabledDecreaseButton}
             >
               -
             </button>
@@ -107,6 +108,32 @@ const Header = ({ cart, onDeleteProduct, onDecreaseQuantity, onIncreaseQuantity,
       </div>
     </div>
   })
+
+
+  //Handle log out button
+  const handleLogout = async () => {
+    try {
+
+      const response = await fetch('http://localhost:5000/account/logout', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+          // Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      });
+      if (response.ok) {
+        localStorage.removeItem('token');
+        localStorage.setItem('successLogin', false)
+        alert('Đăng xuất thành công')
+        window.location.href = '/'
+      } else {
+        console.error('Logout failed.');
+      }
+    }
+    catch (error) {
+      console.error('Error during logout:', error);
+    }
+  };
 
   return (
     <div className="header">
@@ -130,9 +157,6 @@ const Header = ({ cart, onDeleteProduct, onDecreaseQuantity, onIncreaseQuantity,
               <Link className="nav-link" to="/menu">Menu</Link>
             </li>
           </ul>
-          {/* <Link to={'/login&register'}>
-            <FaUserAlt style={{color:"white"}}/>
-          </Link> */}
         </div>
 
         <div className='search-and-cart'>
@@ -187,6 +211,32 @@ const Header = ({ cart, onDeleteProduct, onDecreaseQuantity, onIncreaseQuantity,
                 : (<p className='content-cart'>Chưa có sản phẩm trong giỏ hàng!</p>)
             }
 
+          </div>
+
+          {/* Account button */}
+          <div className="dropdown">
+            <button
+              className="btn dropdown-toggle account-btn"
+              type="button"
+              id="accountDropdown"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+             <i class="material-icons">account_circle</i>
+            </button>
+            <ul className="dropdown-menu" aria-labelledby="accountDropdown">
+              <li>
+                <a className="dropdown-item" href={isLoggedIn ? '/admin' : '/account/login'}>
+                  {isLoggedIn ? 'Tài khoản' : 'Đăng nhập'}
+                </a>
+              </li>
+              <li>
+                <a className="dropdown-item" role= "button" href={isLoggedIn ? null : '/account/register'}
+                  onClick={isLoggedIn ? handleLogout : null}>
+                  {isLoggedIn ? 'Đăng xuất' : 'Đăng ký'}
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
 
