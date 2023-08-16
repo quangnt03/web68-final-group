@@ -13,7 +13,8 @@ import mockPopularDish from "./mockData/mockPopularDish";
 import ErrorPage from "./pages/ErrorPage/ErrorPage";
 import LoginRegister from "./pages/LoginRegister/LoginRegister";
 import Admin from "./pages/Admin/Admin";
-
+import Login from "./pages/LoginRegister/Login";
+import Register from "./pages/LoginRegister/Register";
 const App = () => {
   const [popularDish, setPopularDish] = useState([]);
   const [comboDishes, setComboDishes] = useState([]);
@@ -213,7 +214,8 @@ const App = () => {
               />
             }
           />
-
+          <Route path="/account/login" element={<Login />} />
+          <Route path="/account/register" element={<Register />} />
           <Route path="/*" element={<ErrorPage />} />
           <Route path="/admin" element={<Admin cart={cart} />} />
         </Routes>
